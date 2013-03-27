@@ -1,3 +1,30 @@
-<h1>Your Account</h1><%= link_to "Edit", edit_user_path(current_user) %> 
+<% if current_user == @user %>
+<h1>Your Profile</h1>
+<% else %>
+<h1><%= @user.first_name %>'s Profile</h1>
+<% end %> 
 
 <p class="notice"><%= notice %></p>
+
+<% if current_user == @user %>
+<%= link_to "Edit Your Profile", edit_user_path(@user) %> 
+<div class="editable-data">
+		<h3>Your Information</h3>
+	<p>
+		<strong>First Name:</strong> <%= @user.first_name %><br>
+		<strong>Last Name:</strong> <%= @user.last_name %><br>
+		<strong>Email:</strong> <%= @user.email %><br>
+		<strong>Phone:</strong> <%= @user.phone %><br>
+	</p>
+</div>
+<% else %> 
+
+<div class="info">
+	<h3>About <%= @user.first_name %></h3>
+	<p>
+		<strong>Name:</strong> <%= @user.first_name %><br>
+		<strong>Ratings:</strong>
+	</p>
+</div>
+
+<% end %>

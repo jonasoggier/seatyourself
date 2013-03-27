@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327140337) do
+ActiveRecord::Schema.define(:version => 20130327201538) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -51,22 +51,21 @@ ActiveRecord::Schema.define(:version => 20130327140337) do
     t.text     "description"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "timeslot_id"
     t.integer  "restaurant_type_id"
+    t.string   "email"
+    t.string   "manager_name"
+    t.string   "password_digest"
   end
 
   add_index "restaurants", ["restaurant_type_id"], :name => "index_restaurants_on_restaurant_type_id"
-  add_index "restaurants", ["timeslot_id"], :name => "index_restaurants_on_timeslot_id"
 
   create_table "timeslots", :force => true do |t|
     t.string   "slot"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "reservation_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "restaurant_id"
   end
 
-  add_index "timeslots", ["reservation_id"], :name => "index_timeslots_on_reservation_id"
   add_index "timeslots", ["restaurant_id"], :name => "index_timeslots_on_restaurant_id"
 
   create_table "users", :force => true do |t|
@@ -77,9 +76,6 @@ ActiveRecord::Schema.define(:version => 20130327140337) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.integer  "reservation_id"
   end
-
-  add_index "users", ["reservation_id"], :name => "index_users_on_reservation_id"
 
 end

@@ -4,6 +4,7 @@ Seatyourself::Application.routes.draw do
     resources :reservations
   end
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :restaurants, :exclude => [:index]
 
 
   # The priority is based upon order of creation:

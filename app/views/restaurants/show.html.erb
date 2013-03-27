@@ -1,0 +1,28 @@
+<% if current_restaurant == @restaurant %>
+<h1>Manage <%= @restaurant.name %></h1>
+<% else %>
+<h1><%= @restaurant.name %></h1>
+<% end %> 
+
+<p class="notice"><%= notice %></p>
+
+<div class="info">
+	<h3>Location</h3>
+	<p>
+		<strong>City:</strong> <%= @restaurant.city %><br>
+		<strong>Address:</strong> <%= @restaurant.street_address %><br>
+		<strong>District:</strong> <%= @restaurant.district %>
+	</p>
+	<h3>About <% @restaurant.name %></h3>
+	<p>
+		<strong>Food Category:</strong> <br>
+		<strong>Total Tables:</strong> <%= @restaurant.tables %><br>
+		<strong>Description:</strong> <%= @restaurant.description %>
+	</p>
+</div>
+
+<% if current_restaurant == @restaurant %>
+<%= link_to "Edit", edit_restaurant_path(@restaurant) %> 
+<% else %>
+	
+<% end %>
