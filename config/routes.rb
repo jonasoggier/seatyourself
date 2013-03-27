@@ -1,4 +1,11 @@
 Seatyourself::Application.routes.draw do
+  root :to => 'home#index'
+  resources :users, :exclude => [:index] do
+    resources :reservations
+  end
+  resources :sessions, :only => [:new, :create, :destroy]
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
