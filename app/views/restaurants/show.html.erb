@@ -15,7 +15,7 @@
 	</p>
 	<h3>About <% @restaurant.name %></h3>
 	<p>
-		<strong>Food Category:</strong> <br>
+		<strong>Food Category:</strong> <%= @restaurant.categories.map {|category| category.name}.join(", ") %><br>
 		<strong>Total Tables:</strong> <%= @restaurant.tables %><br>
 		<strong>Description:</strong> <%= @restaurant.description %>
 	</p>
