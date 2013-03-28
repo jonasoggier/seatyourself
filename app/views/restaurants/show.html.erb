@@ -1,4 +1,4 @@
-<% if current_restaurant == @restaurant %>
+<% if current_user == @restaurant.manager %>
 <h1>Manage <%= @restaurant.name %></h1>
 <% else %>
 <h1><%= @restaurant.name %></h1>
@@ -21,7 +21,9 @@
 	</p>
 </div>
 
-<% if current_restaurant == @restaurant %>
+<%= render "reservation" if current_user %>
+
+<% if current_user == @restaurant.manager %>
 <%= link_to "Edit", edit_restaurant_path(@restaurant) %> 
 <% else %>
 	

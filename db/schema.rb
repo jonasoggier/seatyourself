@@ -11,16 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327201538) do
+ActiveRecord::Schema.define(:version => 20130327222717) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.integer  "restaurant_type_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "categories", ["restaurant_type_id"], :name => "index_categories_on_restaurant_type_id"
+  create_table "categories_restaurants", :force => true do |t|
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "restaurant_id"
+    t.integer  "category_id"
+  end
+
+  add_index "categories_restaurants", ["category_id"], :name => "index_restaurant_types_on_category_id"
+  add_index "categories_restaurants", ["restaurant_id"], :name => "index_restaurant_types_on_restaurant_id"
 
   create_table "reservations", :force => true do |t|
     t.datetime "created_at",  :null => false
@@ -32,16 +39,6 @@ ActiveRecord::Schema.define(:version => 20130327201538) do
   add_index "reservations", ["timeslot_id"], :name => "index_reservations_on_timeslot_id"
   add_index "reservations", ["user_id"], :name => "index_reservations_on_user_id"
 
-  create_table "restaurant_types", :force => true do |t|
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "restaurant_id"
-    t.integer  "category_id"
-  end
-
-  add_index "restaurant_types", ["category_id"], :name => "index_restaurant_types_on_category_id"
-  add_index "restaurant_types", ["restaurant_id"], :name => "index_restaurant_types_on_restaurant_id"
-
   create_table "restaurants", :force => true do |t|
     t.string   "name"
     t.string   "street_address"
@@ -49,21 +46,16 @@ ActiveRecord::Schema.define(:version => 20130327201538) do
     t.string   "city"
     t.integer  "tables"
     t.text     "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.integer  "restaurant_type_id"
-    t.string   "email"
-    t.string   "manager_name"
-    t.string   "password_digest"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "manager_id"
   end
 
-  add_index "restaurants", ["restaurant_type_id"], :name => "index_restaurants_on_restaurant_type_id"
-
   create_table "timeslots", :force => true do |t|
-    t.string   "slot"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "restaurant_id"
+    t.datetime "start_time"
   end
 
   add_index "timeslots", ["restaurant_id"], :name => "index_timeslots_on_restaurant_id"

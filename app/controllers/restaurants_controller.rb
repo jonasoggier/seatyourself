@@ -9,16 +9,17 @@ class RestaurantsController < ApplicationController
 
   def edit
     @restaurant = Restaurant.find(params[:id])
-    unless @restaurant == current_restaurant
+    unless @restaurant.manager == current_user
       raise ActionController::RoutingError.new('Forbidden')
     end
   end
 
   def create
     @restaurant = Restaurant.new(params[:restaurant])
+    @restaurant.manager = current_user
 
     if @restaurant.save
-      redirect_to @restaurant, notice: 'Your account was successfully created.'
+      redirect_to @restaurant, notice: 'Your restaurant was successfully created.'
     else
       render action: "new"
     end
@@ -28,7 +29,7 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
 
     if @restaurant.update_attributes(params[:restaurant])
-      redirect_to @restaurant, notice: 'Your account was successfully updated.'
+      redirect_to @restaurant, notice: 'Your restaurant was successfully updated.'
     else
       render action: "edit"
     end

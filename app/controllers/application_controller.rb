@@ -9,11 +9,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_restaurant
-  	if session[:restaurant_id]
-    	@current_restaurant ||= Restaurant.find(session[:restaurant_id])
-    end
-  end
-
-  helper_method :current_user, :current_restaurant
+  helper_method :current_user
 end

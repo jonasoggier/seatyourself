@@ -1,8 +1,8 @@
 Seatyourself::Application.routes.draw do
   root :to => 'home#index'
-  resources :users, :exclude => [:index] do
-    resources :reservations
-  end
+  resources :users, :exclude => [:index]
+  resources :reservations
+  
   resources :sessions, :only => [:new, :create, :destroy]
   resources :restaurants, :exclude => [:index]
 
