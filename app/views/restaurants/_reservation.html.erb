@@ -16,8 +16,8 @@
   <%= hidden_field_tag 'timeslot[restaurant_id]', @restaurant.id %>
 
   <div class="field">
-    <%= f.label :start_time %><br />
-    <%= text_field_tag 'timeslot[start_time]' %>
+    <%= f.label "Test" %><br />
+    <%= select_tag 'timeslot[start_time]', options_from_collection_for_select(@restaurant.generate_two_weeks_of_datetimes(@restaurant), :last, :first ) %>
   </div>
 
   <div class="actions">
